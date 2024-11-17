@@ -1,35 +1,49 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import './App.css';
 
-function App() {
-  const [count, setCount] = useState(0)
+const currentTime = new Date().getHours();
+const clockTime = new Date().toLocaleTimeString();
 
-  return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+const date = new Date();
+
+
+const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+
+
+const dayOfWeekIndex = date.getDay();  
+const dayOfMonth = date.getDate(); 
+const monthIndex = date.getMonth();
+const year = date.getFullYear();  
+
+
+const dayOfTheWeek = weekdays[dayOfWeekIndex];
+const monthOfTheYear = monthNames[monthIndex];
+
+
+const currentDate = `${dayOfTheWeek} ${dayOfMonth} ${monthOfTheYear} ${year}`;
+
+let greeting = '';
+const customStyles = { color: '' };
+
+if (currentTime < 12) {
+  greeting = 'Good Morning';
+  customStyles.color = 'red';
+} else if (currentTime < 18) {
+  greeting = 'Good Afternoon';
+  customStyles.color = 'orange';
+} else {
+  greeting = 'Good Evening';
+  customStyles.color = 'purple';
 }
 
-export default App
+function App() {
+  return (
+    <>
+      <h1 style={customStyles}>{greeting}</h1>
+      <p>Today&apos;s Date is: {currentDate}</p>
+      <p>The current time is: {clockTime}</p>
+    </>
+  );
+}
+
+export default App;
